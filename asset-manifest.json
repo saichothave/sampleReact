@@ -1,14 +1,19 @@
 {
   "files": {
-    "main.css": "/sampleReact/static/css/main.f855e6bc.css",
-    "main.js": "/sampleReact/static/js/main.8182d838.js",
+    "main.css": "/sampleReact/static/css/main.b3845071.css",
+    "main.js": "/sampleReact/static/js/main.22df61b9.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/sampleReact/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/sampleReact/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/sampleReact/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/sampleReact/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/sampleReact/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "static/media/logo.svg": "/sampleReact/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/sampleReact/index.html",
-    "main.f855e6bc.css.map": "/sampleReact/static/css/main.f855e6bc.css.map",
-    "main.8182d838.js.map": "/sampleReact/static/js/main.8182d838.js.map"
+    "main.b3845071.css.map": "/sampleReact/static/css/main.b3845071.css.map",
+    "main.22df61b9.js.map": "/sampleReact/static/js/main.22df61b9.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.8182d838.js"
+    "static/css/main.b3845071.css",
+    "static/js/main.22df61b9.js"
   ]
 }
