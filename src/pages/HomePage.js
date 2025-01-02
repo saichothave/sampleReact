@@ -11,7 +11,7 @@ const HomePage = () => {
   const [newListKey, setNewListKey] = useState(null);
   const [newListItems, setNewListItems] = useState([]);
   const [initialLists, setInitialLists] = useState({});
-  const [history, setHistory] = useState([]); 
+  const [history, setHistory] = useState([]);
 
   // Fetching data from the API
   const fetchListData = async () => {
@@ -92,16 +92,16 @@ const HomePage = () => {
     // Determine the target list based on the direction ('left' or 'right')
     const targetListNumber = direction === 'left' ? selectedLists[0] : selectedLists[1];
     console.log("direction", direction)
-  
+
     // Remove item from the new list and move it to the selected list
     setNewListItems((prevNewListItems) =>
       prevNewListItems.filter((listItem) => listItem.id !== item.id)
     );
-  
+
     // Use the common function to move the item to the target list
     moveItemBetweenLists(item, newListKey, targetListNumber);
   };
-  
+
 
   const moveItemBetweenLists = (item, sourceListNumber, targetListNumber) => {
     if (!sourceListNumber || !targetListNumber) {
@@ -183,62 +183,90 @@ const HomePage = () => {
 
   return (
     <div>
-      <b><h2>List Creation</h2></b>
-      {!isCreatingList && (
-        <button 
-        onClick={handleCreateNewList} 
-        style={buttonStyle} 
-        className="create-list-button"
-      >
-        <span style={iconStyle}>&#43;</span> Create a New List
-      </button>
-      )}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      {isLoading && <p>Loading...</p>}
-      {hasError && (
-        <div>
-          <p>Failed to load the lists. Please try again.</p>
-          <button onClick={fetchListData}>Try Again</button>
-        </div>
-      )}
-      {!isLoading && !hasError && !isCreatingList && (
-        <div style={containerStyle}>{renderLists()}</div>
-      )}
+      {isLoading ? (
+        <>
+          <style>{loaderAnimation}</style>
+          <div style={loaderStyle}></div>
+        </>
+      ) : (
+        <>
+          {hasError ? (
+            <div style={errorContainerStyle}>
+              <img
+                src="/list-creation-failure-lg-output.png"
+                alt="Error"
+                style={errorImageStyle}
+              />
+              <p>Failed to load the lists. Please try again.</p>
+              <button onClick={fetchListData} style={buttonStyle}>Try Again</button>
+            </div>
+          ) : (
+            <>
+              <b><h2>List Creation</h2></b>
+              {!isCreatingList && (
+                <button
+                  onClick={handleCreateNewList}
+                  style={buttonStyle}
+                >
+                  <span style={iconStyle}>&#43;</span> Create a New List
+                </button>
+              )}
+              {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
-      {isCreatingList && (
-        <div>
-          <h3>List Creation</h3>
-          <div style={containerStyle}>
-            <ListContainer
-              listNumber={selectedLists[0]}
-              items={lists[selectedLists[0]]}
-              onMoveItem={handleMoveToNewList}
-              arrowDirection="right"
-            />
+              {/* <div style={containerStyle}>{renderLists()}</div> */}
+              {!isLoading && !hasError && !isCreatingList && (
+                <div style={containerStyle}>{renderLists()}</div>
+              )}
 
-            <ListContainer
-              listNumber={newListKey}
-              items={newListItems}
-              onMoveItemFromNewList={handleMoveFromNewList}
-              selectedLists={selectedLists}
-              isNewList
-            />
+              {isCreatingList && (
+                <div>
+                  <div style={containerStyle}>
+                    <ListContainer
+                      listNumber={selectedLists[0]}
+                      items={lists[selectedLists[0]]}
+                      onMoveItem={handleMoveToNewList}
+                      arrowDirection="right"
+                    />
+                    <ListContainer
+                      listNumber={newListKey}
+                      items={newListItems}
+                      onMoveItemFromNewList={handleMoveFromNewList}
+                      selectedLists={selectedLists}
+                      isNewList
+                    />
+                    <ListContainer
+                      listNumber={selectedLists[1]}
+                      items={lists[selectedLists[1]]}
+                      onMoveItem={handleMoveToNewList}
+                      arrowDirection="left"
+                    />
+                  </div>
+                  <div style={buttonContainerStyle}>
+                    <button
+                      onClick={handleUpdate}
+                      style={{ ...buttonStyle, backgroundColor: '#4CAF50' }}
+                    >
+                      <span style={iconStyle}>✓</span> Update
+                    </button>
 
-            <ListContainer
-              listNumber={selectedLists[1]}
-              items={lists[selectedLists[1]]}
-              onMoveItem={handleMoveToNewList}
-              arrowDirection="left"
-            />
-          </div>
-          <div>
-            <button onClick={handleUpdate}>Update</button>
-            <button onClick={handleCancel}>Cancel</button>
-          </div>
-        </div>
+                    <button
+                      onClick={handleCancel}
+                      style={{ ...buttonStyle, backgroundColor: '#f44336' }}
+                    >
+                      <span style={iconStyle}>✖</span> Cancel
+                    </button>
+                  </div>
+
+                </div>
+              )}
+            </>
+          )}
+        </>
       )}
     </div>
   );
+
+
 };
 
 const containerStyle = {
@@ -256,28 +284,77 @@ const listWrapperStyle = {
 const checkboxContainerStyle = {
   marginBottom: '10px',
 };
+const buttonContainerStyle = {
+  display: 'flex',
+  gap: '10px',
+  justifyContent: 'center',
+  marginTop: '20px',
+  marginBottom: '20px',
+
+};
 
 const buttonStyle = {
-  backgroundColor: '#007bff',  
-  color: 'white',              
-  border: 'none',              
-  borderRadius: '8px',         
-  padding: '12px 20px',        
-  fontSize: '16px',          
-  cursor: 'pointer',         
-  display: 'flex',            
-  alignItems: 'center',       
-  justifyContent: 'center', 
-  gap: '8px',                 
-  transition: 'background-color 0.3s',  
-  margin: '0 auto',           
-  width: 'auto',              
-  textAlign: 'center',        
+  backgroundColor: '#007bff',
+  color: 'white',
+  border: 'none',
+  borderRadius: '8px',
+  padding: '12px 20px',
+  fontSize: '16px',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '8px',
+  transition: 'background-color 0.3s',
+  margin: '0 auto',
+  width: 'auto',
+  textAlign: 'center',
 };
 
 const iconStyle = {
-  fontSize: '20px',           
+  fontSize: '20px',
 };
+
+const errorContainerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+  padding: '20px',
+  gap: '15px',
+};
+
+const errorImageStyle = {
+  width: 'auto', // Adjust image size as needed
+  height: 'auto',
+  marginBottom: '10px',
+};
+
+
+
+const loaderStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '40px',
+  height: '40px',
+  border: '8px solid #f3f3f3',
+  borderTop: '8px solid #3498db',
+  borderRadius: '50%',
+  animation: 'spin 2s linear infinite',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+};
+const loaderAnimation = `
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
 
 
 
