@@ -258,25 +258,25 @@ const checkboxContainerStyle = {
 };
 
 const buttonStyle = {
-  backgroundColor: '#007bff',  // Primary blue color
-  color: 'white',              // White text
-  border: 'none',              // No border
-  borderRadius: '8px',         // Rounded corners
-  padding: '12px 20px',        // Padding for comfortable click size
-  fontSize: '16px',            // Larger font size
-  cursor: 'pointer',          // Pointer cursor on hover
-  display: 'flex',             // Flexbox for centering content
-  alignItems: 'center',       // Centering text and icon vertically
-  justifyContent: 'center',   // Center button content horizontally
-  gap: '8px',                 // Space between the icon and text
-  transition: 'background-color 0.3s',  // Smooth transition for background color
-  margin: '0 auto',           // Center the button horizontally
-  width: 'auto',              // Adjust the button width based on content
-  textAlign: 'center',        // Ensure the text inside is centered
+  backgroundColor: '#007bff',  
+  color: 'white',              
+  border: 'none',              
+  borderRadius: '8px',         
+  padding: '12px 20px',        
+  fontSize: '16px',          
+  cursor: 'pointer',         
+  display: 'flex',            
+  alignItems: 'center',       
+  justifyContent: 'center', 
+  gap: '8px',                 
+  transition: 'background-color 0.3s',  
+  margin: '0 auto',           
+  width: 'auto',              
+  textAlign: 'center',        
 };
 
 const iconStyle = {
-  fontSize: '20px',            // Icon size
+  fontSize: '20px',           
 };
 
 

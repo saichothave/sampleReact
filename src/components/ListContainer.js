@@ -12,7 +12,7 @@ const ListContainer = ({
   return (
     <div style={listContainerStyle}>
       <h3>List Number: {listNumber}</h3>
-      <ul>
+      <div>
         {items.map((item) => (
           <ListItem
             key={item.id}
@@ -23,14 +23,14 @@ const ListContainer = ({
             isNewList={isNewList}
           />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
 
 const listContainerStyle = {
   backgroundColor: '#cceeff',
-  padding: '10px',
+  padding: '20px',
   borderRadius: '8px',
   height: '800px',
   overflowY: 'auto',

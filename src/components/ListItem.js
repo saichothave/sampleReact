@@ -8,7 +8,7 @@ const ListItem = ({
   isNewList,
 }) => {
   return (
-    <li style={listItemStyle}>
+    <div style={listItemStyle}>
       <div>
         <p><strong>{item.name}</strong></p>
         <p>{item.description}</p>
@@ -35,18 +35,23 @@ const ListItem = ({
           </>
         )}
       </div>
-    </li>
+    </div>
   );
 };
 
 const listItemStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '10px',
-  borderBottom: '1px solid #ccc',
-};
-
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '16px',
+    backgroundColor: 'white',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    borderBottom: '1px solid #ddd',
+    marginBottom: '10px',
+    transition: 'transform 0.2s ease',
+  };
+  
 const arrowContainerStyle = {
   display: 'flex',
   alignItems: 'center',
